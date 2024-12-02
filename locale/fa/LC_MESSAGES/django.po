@@ -1,0 +1,353 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-29 20:44+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\comment\apps.py:9
+msgid "comment"
+msgstr "کامنت"
+
+#: .\comment\conf\defaults.py:14
+msgid "Spam | Exists only to promote a service"
+msgstr "هرزنامه | فقط برای تبلیغ یک سرویس وجود دارد"
+
+#: .\comment\conf\defaults.py:15
+msgid "Abusive | Intended at promoting hatred"
+msgstr "توهین آمیز | با هدف ترویج نفرت"
+
+#: .\comment\managers\flags.py:23
+msgid "Something else"
+msgstr "یک چیز دیگر"
+
+
+#: .\comment\messages.py:8
+msgid "Comment App: You must be logged in to perform this action."
+msgstr "کامنت : برای انجام این عمل باید وارد سیستم شوید."
+
+#: .\comment\messages.py:9
+msgid "You do not have permission to perform this action."
+msgstr "شما اجازه انجام این عمل را ندارید."
+
+
+
+
+#: .\comment\templates\comment\comments\base.html:8
+msgid "Comments"
+msgstr "کامنت ها"
+
+#: .\comment\templates\comment\comments\base.html:17
+msgid "comment on this post..."
+msgstr "کامنت خود را وارد کنید"
+
+#: .\comment\templates\comment\comments\base.html:21
+msgid "reply to this comment..."
+msgstr "پاسخ به این کامنت ..."
+
+
+#: .\comment\templates\comment\comments\comment_content.html:23
+msgid "Edit"
+msgstr "ویرایش"
+
+#: .\comment\templates\comment\comments\comment_content.html:23
+
+msgid "Edited:"
+msgstr "ویرایش شده"
+
+#: .\comment\templates\comment\comments\comment_content.html:23
+#: .\comment\templates\comment\comments\comment_content.html:25
+msgid "ago"
+msgstr "قبل"
+
+#: .\comment\templates\comment\comments\comment_content.html:25
+msgid "Posted"
+msgstr "ارسال شد"
+
+#: .\comment\templates\comment\comments\comment_content.html:47
+msgid " Reply"
+msgid_plural " Replies"
+msgstr[0] "پاسخ"
+msgstr[1] "پاسخ ها"
+
+#: .\comment\templates\comment\comments\comment_modal.html:6
+msgid "Confirm comment deletion"
+msgstr "تایید حذف کامنت"
+
+#: .\comment\templates\comment\comments\comment_modal.html:12
+msgid "Are you sure you want to delete this comment"
+msgstr "ایا میخواهید این کامنت را حذف کنید"
+
+#: .\comment\templates\comment\comments\comment_modal.html:22
+#: .\templates\cart_summary.html:53
+#: .\venv1\Lib\site-packages\django\forms\formsets.py:499
+msgid "Delete"
+msgstr "حذف"
+
+#: .\comment\templates\comment\comments\content.html:9
+msgid "read more"
+msgstr "بیشتر ..."
+
+#: .\comment\templates\comment\comments\create_comment.html:20
+msgid "Reply"
+msgstr "پاسخ"
+
+#: .\comment\templates\comment\comments\create_comment.html:31
+msgid "Comment Anonymously or"
+msgstr ""
+
+#: .\comment\templates\comment\comments\create_comment.html:33
+#: .\comment\templates\comment\comments\create_comment.html:40
+#: .\templates\navbar.html:40
+msgid "Login"
+msgstr "وارد شدن"
+
+#: .\comment\templates\comment\comments\create_comment.html:35
+msgid "to keep your conversations intact"
+msgstr "تا مکالمات خود را نگه دارید"
+
+#: .\comment\templates\comment\comments\create_comment.html:42
+msgid "to join the discussion"
+msgstr "برای درج کامنت وارد شوید"
+
+#: .\comment\templates\comment\comments\delete_icon.html:3
+msgid "Delete comment"
+msgstr "حذف"
+
+#: .\comment\templates\comment\comments\edit_icon.html:3
+msgid "Edit comment"
+msgstr "ویرایش کامنت"
+
+
+#: .\comment\templates\comment\comments\pagination.html:4
+msgid "last"
+msgstr "اخرین"
+
+#: .\comment\templates\comment\comments\pagination.html:5
+msgid "Next"
+msgstr "بعدی"
+
+#: .\comment\templates\comment\comments\pagination.html:6
+msgid "Previous"
+msgstr "قبلی"
+
+
+#: .\comment\templates\comment\notifications\notification.html:9
+#: .\comment\templates\comment\notifications\notification.txt:4
+msgid "has added a comment at"
+msgstr "نظری اضافه کرده است"
+
+#: .\comment\templates\comment\notifications\notification.html:9
+#: .\comment\templates\comment\notifications\notification.txt:4
+msgid "to"
+msgstr "به"
+
+#: .\comment\templates\comment\notifications\notification.html:18
+msgid "Go to site"
+msgstr "برو به سایت"
+
+#: .\comment\templates\comment\reactions\reactions.html:5
+msgid "like"
+msgstr "پسندیدن"
+
+#: .\comment\templates\comment\reactions\reactions.html:16
+msgid "dislike"
+msgstr "نپسندیدن"
+
+#: .\digikala\settings.py:135
+msgid "English"
+msgstr "انگلیسی"
+
+#: .\digikala\settings.py:136
+msgid "Farsi"
+msgstr "فارسی"
+
+#: .\shop\apps.py:7
+msgid "Shop"
+msgstr "فروشگاه"
+
+#: .\shop\models.py:87
+msgid "title"
+msgstr "موضوع"
+
+#: .\shop\models.py:88
+msgid "image"
+msgstr "عکس"
+
+#: .\shop\models.py:90
+msgid "order"
+msgstr "ترتیب"
+
+#: .\templates\about.html:9 .\templates\navbar.html:19
+msgid "about us"
+msgstr "درباره ما"
+
+#: .\templates\about.html:10
+msgid "know more"
+msgstr "بیشتر بدانید"
+
+#: .\templates\base.html:11 .\templates\navbar.html:5
+msgid "MY SHOP"
+msgstr "فروشگاه من"
+
+#: .\templates\base.html:37
+msgid "Made with"
+msgstr "ساخته شده"
+
+#: .\templates\base.html:37
+msgid "and Django"
+msgstr "و جنگو"
+
+#: .\templates\bestseller.html:12
+msgid "Best seller products"
+msgstr "محصولات پرفروش"
+
+#: .\templates\bestseller.html:43 .\templates\bestseller.html:44
+#: .\templates\bestseller.html:76 .\templates\cart_summary.html:31
+#: .\templates\cart_summary.html:32 .\templates\cart_summary.html:34
+#: .\templates\category.html:43 .\templates\category.html:44
+#: .\templates\category.html:76 .\templates\favorite_product.html:43
+#: .\templates\favorite_product.html:44 .\templates\index.html:69
+#: .\templates\index.html:70 .\templates\index.html:102
+#: .\templates\last_product.html:43 .\templates\last_product.html:44
+#: .\templates\last_product.html:76 .\templates\search.html:43
+#: .\templates\search.html:44 .\templates\search.html:76
+#: .\templates\single_product.html:20 .\templates\single_product.html:21
+#: .\templates\single_product.html:23
+msgid "Toman"
+msgstr "تومان"
+
+#: .\templates\bestseller.html:50 .\templates\bestseller.html:82
+#: .\templates\category.html:50 .\templates\category.html:82
+#: .\templates\favorite_product.html:50 .\templates\index.html:76
+#: .\templates\index.html:108 .\templates\last_product.html:82
+#: .\templates\search.html:50 .\templates\search.html:82
+msgid "go to details product"
+msgstr "برو به صفحه جزییات محصول"
+
+#: .\templates\cart_summary.html:12
+msgid "Shopping cart"
+msgstr "سبد خرید"
+
+#: .\templates\cart_summary.html:37 .\templates\single_product.html:26
+msgid "Number"
+msgstr "تعداد"
+
+#: .\templates\cart_summary.html:52
+msgid "Edit"
+msgstr "ویرایش"
+
+#: .\templates\cart_summary.html:54 .\templates\single_product.html:36
+msgid "go to home page"
+msgstr "بازگشت به صفحه اصلی"
+
+#: .\templates\cart_summary.html:61
+msgid "Totoal of your cart"
+msgstr "مجموع کل سبد خرید"
+
+#: .\templates\cart_summary.html:64
+msgid "The cart is empty"
+msgstr "سبد خرید خالی است"
+
+#: .\templates\cart_summary.html:64
+msgid "for see more products click on this link"
+msgstr "برای مشاهده بیشتر محصولات وارد لینک شوید"
+
+#: .\templates\cart_summary.html:64 .\templates\category_summery.html:8
+msgid "All categories"
+msgstr "همه ی دسته بندی ها"
+
+#: .\templates\favorite_product.html:12
+msgid "Favorite products"
+msgstr "محصولات محبوب"
+
+#: .\templates\favorite_product.html:42 .\templates\search.html:42
+#: .\templates\search.html:75
+msgid "at"
+msgstr "در دسته"
+
+#: .\templates\index.html:11
+msgid "Here is my shop"
+msgstr "اینجا فروشگاه من است"
+
+#: .\templates\index.html:12
+msgid "welcome"
+msgstr "خوش امدید"
+
+#: .\templates\last_product.html:12
+msgid "last products"
+msgstr "محصولات جدید"
+
+#: .\templates\navbar.html:11
+msgid "search..."
+msgstr "جستجو..."
+
+#: .\templates\navbar.html:18
+msgid "Home"
+msgstr "خانه"
+
+#: .\templates\navbar.html:21
+msgid "store"
+msgstr "فروشگاه"
+
+#: .\templates\navbar.html:23
+msgid "All Categories"
+msgstr "همه ی دسته بندی ها"
+
+#: .\templates\navbar.html:25
+msgid "Bestseller"
+msgstr "محصولات پرفروش"
+
+#: .\templates\navbar.html:26
+msgid "Favorite"
+msgstr "محصولات محبوب"
+
+#: .\templates\navbar.html:27
+msgid "New Product"
+msgstr "محصولات جدید"
+
+#: .\templates\navbar.html:31
+msgid "User"
+msgstr "کاربر"
+
+#: .\templates\navbar.html:36
+msgid "Profile"
+msgstr "پروفایل"
+
+#: .\templates\navbar.html:37
+msgid "Change Password"
+msgstr "تغییر پسورد"
+
+#: .\templates\navbar.html:38
+msgid "Logout"
+msgstr "خارج شدن"
+
+#: .\templates\navbar.html:41
+msgid "Signup"
+msgstr "ساخت اکانت جدید"
+
+#: .\templates\navbar.html:67
+msgid "shopping cart"
+msgstr "سبد خرید"
+
+#: .\templates\search.html:10
+msgid "about your search"
+msgstr "درباره ما"
+
+#: .\templates\single_product.html:35
+msgid "add to cart"
+msgstr "افزودن به سبد خرید"
+

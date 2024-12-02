@@ -1,0 +1,23 @@
+<center>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if products.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="{% url 'home'  %}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="{% url 'home' products.previous_page_number %}">{{ products.previous_page_number}}</a></li>
+      {% endif %}
+      <li class="page-item active"><a class="page-link">{{products.number}}</a></li>
+      {% if products.has_next %}
+      <li class="page-item"><a class="page-link" href="{% url 'home' products.next_page_number %}">{{  products.next_page_number}}</a></li>
+      <li class="page-item">
+        <a class="page-link" href="{% url 'home' products.paginator.num_pages %}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</center>

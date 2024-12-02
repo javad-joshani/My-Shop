@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">{%trans "Edit information page"%} </h1>
+        </div>
+    </div>
+</header>
+<br><br>
+<div class="container">
+    <div class="row">
+
+            <div class="col-4" style="border:1px solid;border-radius:25px;margin-right:30%">
+                <form method="post" action="{% url 'update_user' %}">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <center><button type="submit" class="btn btn-success">{% trans "signup" %} </button></center>
+                  </form>
+                  {% if form.errors %}
+                  <p style="color:red">{%trans "Please correct the following errors."%} </p><br>
+                  {% for field in form %}
+                      {% if field.errors %}
+                          {% for errors in field.errors %}
+                          {{field.label}} : {{errors}}<br>
+                          {% endfor %}
+                      {% endif %}
+                  {% endfor %}
+          
+                  {% if form.non_fiels_errors %}
+                      {{form.non_fiels_errors}}
+                  {% endif %}
+                  
+              {% endif %}
+
+            </div>
+
+    </div>        
+</div>
+<br><br>
+{% endblock content %}
+

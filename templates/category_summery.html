@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">{% trans "All categories" %}</h1>
+        </div>
+    </div>
+</header>
+<br><br>
+
+    <center>
+                {% for category in category %}
+                <div class="card col-5">
+                <h4 class="cart"><a style="text-decoration: none" href="{% url 'category' category.name %}">{{category.name}}</a></h4>   
+                </div>        
+                {% endfor %}
+    </center>
+
+<br><br>
+{% endblock content %}
+

@@ -1,0 +1,78 @@
+{% load i18n %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <p><a class="navbar-brand" href="{% url 'home' %}">{% trans "MY SHOP" %}</a></p>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <form method="POST" action="{% url 'search' %}">
+                {% csrf_token %}
+            <div class="input-group" dir="ltr" style="margin-right:35px" >
+                <input type="search" id="form1" class="form-control" placeholder="                   {% trans 'search...' %}" name="searched"/>
+                <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
+              </div>
+            </form>  
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">{% translate "about us" %}</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">{% trans "store" %}</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'category_summery' %}">{% translate "All Categories" %}</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{% url 'bestseller' %}">{% translate "Bestseller" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'favorite_product' %}">{% translate "Favorite" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'last_product' %}">{% translate "New Product" %}</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"></i>{% translate "User" %}</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.is_authenticated %}
+                        <li class="dropdown-item">{{user.first_name}}</li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{% url 'update_user' %}">{% translate "Profile" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'update_password' %}">{% translate "Change Password" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">{% translate "Logout" %}</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'login' %}">{% translate "Login" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'signup' %}">{% translate "Signup" %}</a></li>
+                        {% endif %}
+                    </ul> 
+                </li>
+            </ul>
+
+            <form action="{% url 'set_language' %}" method="post" id="language-form">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+
+                <div class="mb-1">
+                    <select name="language" id="languageSelect" class="form-select" onchange="this.form.submit();">
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}" 
+                                    {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+            
+            <form class="d-flex">
+                <a class="btn btn-outline-dark" href="{% url 'cart_summary' %}">
+                    <i class="bi-cart-fill me-1"></i>
+                    {% translate "shopping cart" %}
+                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_number">{{cart|length}}</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    document.getElementById('languageSelect').addEventListener('change', function() {
+        this.form.submit();
+    });
+</script>

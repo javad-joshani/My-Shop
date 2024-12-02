@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+
+
+{% block content %}
+<!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">{% trans "Shopping cart" %}</h1>
+            </div>
+        </div>
+    </header>
+    <!-- Section-->
+     <br><br><br>
+     {% if cart_products %}
+     {% for product in cart_products %}
+    <div class="container">
+        <div class="card mb-3" >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{product.picture.url}}" class="img-fluid rounded-start" alt="{{product.name}}">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{product.name}}</h5>
+                  <p class="card-text">{{product.description}}</p>
+                  {% if product.discount %}
+                  <strike><span class="text-muted text-decoration">{{product.price | intcomma}} {% trans "Toman" %}</span></strike> - 
+                  <span class="text-muted text-decoration">{{product.get_total_price | intcomma}} {% trans "Toman" %}</span>
+                  {% else %}
+                  <span class="text-muted text-decoration">{{product.get_total_price | intcomma}} {% trans "Toman" %}</span>
+                  {% endif %}
+                  <p class="card-text">
+                    {% trans "Number" %} : 
+                    <select class="form-select form-select-sm" id="select{{product.id}}">
+                      {% for key,value in quantities.items %}
+                        {% if key == product.id|slugify %}
+                          <option selected> {{value}} </option>
+                        {% endif %}
+                      {% endfor %}
+                      <option value="1"> 1 </option>
+                      <option value="2"> 2 </option>
+                      <option value="3"> 3 </option>
+                      <option value="4"> 4 </option>
+                      <option value="5"> 5 </option>
+                    </select>                    
+                  </p>
+                  <br><br>
+                  <button class="btn btn-primary update-cart" type="button" data-index={{product.id}} >{% trans "Edit" %}</button>
+                  <button class="btn btn-danger delete-product" type="button" data-index={{product.id}}>{% trans "Delete" %}</button>
+                  <a role="button" class="btn btn-secondary" href="{% url 'home' %}">{% trans "go to home page" %}</a>
+                </div>
+              </div>
+            </div>
+          </div>      
+    </div>
+    {% endfor %}
+    <center><h3>{% trans "Totoal of your cart" %}: {{total| intcomma}}</h3></center>
+    {% else %}
+    <center>
+    <div class="py-6 lg:px-0 bg-neutral-000 rounded-large"><div class="flex justify-center"><div style="width: 200px; height: 150px; line-height: 0;"><img class="w-full inline-block" src="{% static 'assets/empty-cart.svg' %}" width="200" height="150" alt="empty-cart" title="" style="object-fit: contain;"></div></div><p class="text-h4 text-neutral-800 text-center mt-6">{% trans "The cart is empty" %}!</p><p class="text-body-2 text-neutral-600 text-center mt-2">{% trans "for see more products click on this link" %}:</p> <a style="text-decoration: none" href="{% url 'category_summery' %}">{% trans "All categories" %}</a>
+    <div class="flex justify-center items-center mt-6"><a class="px-4 divider" labelsize="medium" href="/promotion-center/"></a><a class="px-4" labelsize="medium" href="/best-selling/"></a></div></div>
+    {% endif %}
+<br><br><br>
+<script>
+  $(document).on('click' , '.update-cart' , function(e){
+    e.preventDefault();
+
+    var productid = $(this).data('index')
+    $.ajax({
+      type:'POST',
+      url:'{% url "cart_update" %}',
+      data:{
+        product_id: $(this).data('index'),
+        product_qty: $('#select'+productid+' option:selected').text(),
+        csrfmiddlewaretoken:'{{ csrf_token }}',
+        action:'post'
+      },
+      success:function(json){
+        //console.log(json)
+        //document.getElementById("cart_number").textContent = json.number
+        location.reload();
+      },
+      error:function(xhr,errmsg,err){}
+    })
+  })
+
+
+  $(document).on('click' , '.delete-product' , function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url:'{% url "cart_delete" %}',
+      data:{
+        product_id: $(this).data('index'),
+        csrfmiddlewaretoken:'{{ csrf_token }}',
+        action:'post'
+      },
+      success:function(json){
+        //console.log(json)
+        //document.getElementById("cart_number").textContent = json.number
+        location.reload();
+      },
+      error:function(xhr,errmsg,err){}
+    })
+  })
+  </script>
+{% endblock content %}

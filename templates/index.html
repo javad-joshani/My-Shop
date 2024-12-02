@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+
+{% block content %}
+<!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">{% trans "Here is my shop" %}</h1>
+                <p class="lead fw-normal text-white-50 mb-0">{% trans "welcome" %}</p>
+            </div>{% static 'assets/slider/banner-3.jpg' %}
+        </div>
+    </header>
+    <!-- Slideshow Start-->
+    <div class="container px-4 px-lg-5 mt-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+          {% for slide in slides %}
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+          {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+          {% for slide in slides %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img class="d-block w-100" src="{{ slide.image.url }}" alt="{{ slide.title }}">
+            </div>
+          {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+      </div>
+    </div>  
+    <!-- Slideshow End-->
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% for product in products %}
+                    {% if product.is_special %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-danger text-red position-absolute" style="top: 0.5rem; right: 0.5rem">{{product.discount}}-%</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{product.picture.url}}" alt="{{product.name}}" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{product.name}}</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    {% with ''|center:product.star as range %} <!--for star iter-->
+                                        {% for _ in range %}
+                                            <div class="bi-star-fill"></div>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                                <!-- Product price-->
+                                <p>در دسته {{product.category}}</p>
+                                <strike><span class="text-muted text-decoration">{{product.price | intcomma}} {% trans "Toman" %}</span></strike>
+                                <span class="text-muted text-decoration">{{product.get_total_price | intcomma}} {% trans "Toman" %}</span>
+                                
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.pk %}">{% trans "go to details product" %}</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-danger text-red position-absolute" style="top: 0.5rem; right: 0.5rem"></div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{product.picture.url}}" alt="{{product.name}}" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{product.name}}</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    {% with ''|center:product.star as range %} <!--for star iter-->
+                                        {% for _ in range %}
+                                            <div class="bi-star-fill"></div>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                                <!-- Product price-->
+                                <p>در دسته {{product.category}}</p>
+                                <span class="text-muted text-decoration">{{product.price | intcomma}} {% trans "Toman" %}</span>
+                                
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.pk %}">{% trans "go to details product" %}</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% include "pagination.html" with products=products %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}

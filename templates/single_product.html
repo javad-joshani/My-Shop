@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load i18n %}
+{% load comment_tags %}
+
+
+{% block content %}
+<br><br>
+<div class="container">
+    <div class="card mb-3" >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{product.picture.url}}" class="img-fluid rounded-start" alt="{{product.name}}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text">{{product.description}}</p>
+              {% if product.discount %}
+              <strike><span class="text-muted text-decoration">{{product.price | intcomma}} {% trans "Toman" %}</span></strike> - 
+              <span class="text-muted text-decoration">{{product.get_total_price | intcomma}} {% trans "Toman" %}</span>
+              {% else %}
+              <span class="text-muted text-decoration">{{product.price | intcomma}} {% trans "Toman" %}</span>
+              {% endif %}
+              <br><br>
+              {% trans "Number" %} : 
+              <select class="form-select form-select-sm" id="cart-qty">
+                <option value="1"> 1 </option>
+                <option value="2"> 2 </option>
+                <option value="3"> 3 </option>
+                <option value="4"> 4 </option>
+                <option value="5"> 5 </option>
+              </select>
+              <br><br>
+              <button class="btn btn-primary" type="button" value="{{product.id}}" id="add-cart">{% trans "add to cart" %}</button>
+              <a role="button" class="btn btn-primary" href="{% url 'home' %}">{% trans "go to home page" %}</a>
+              {% render_comments product request %}
+              {% include_bootstrap %}
+            </div>
+          </div>
+        </div>
+      </div>      
+</div>
+<br><br><br><br><br><br>
+<script>
+$(document).on('click' , '#add-cart' , function(e){
+  e.preventDefault();
+  $.ajax({
+    type:'POST',
+    url:'{% url "cart_add" %}',
+    data:{
+      product_id:$('#add-cart').val(),
+      product_qty: $('#cart-qty option:selected').text(),
+      csrfmiddlewaretoken:'{{ csrf_token }}',
+      action:'post'
+    },
+    success:function(json){
+      //console.log(json)
+      document.getElementById("cart_number").textContent = json.number
+      location.reload();
+    },
+    error:function(xhr,errmsg,err){}
+  })
+})
+</script>
+{% endblock content %}
+
