@@ -16,7 +16,8 @@ SECRET_KEY = 'django-insecure-_zqlvj*e8nijhm&616)n8kgcg2(s-1jq84k&s2ufmlnvv-9#^f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'javad', 'JAVAD', '127.0.0.1:8000']
+
 
 
 # Application definition
@@ -34,7 +35,9 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'modeltranslation',
     'comment',
-
+    'django_filters',
+    'rest_framework',
+    'rest_framework_simplejwt',
 
     #local
     'shop.apps.ShopConfig',
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+TRANSLATABLE_MODEL_MODULES = []
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -169,3 +173,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_URL = 'login'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+
+}

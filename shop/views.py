@@ -9,7 +9,12 @@ from django.utils.translation import activate
 from django.core.paginator import Paginator
 
 from .forms import SignupForm,UpdateUserForm,UpdatePasswordForm
-from .models import Product,Category,Slider
+from .models import Category,Customer,Profile,Product,Order,Slider
+
+from rest_framework import viewsets,permissions 
+from .serializers import CategorySerializer,CustomerSerializer,ProfileSerializer,ProductSerializer,OrderSerializer,SliderSerializer
+from django_filters import rest_framework as filters
+from rest_framework.pagination import PageNumberPagination
 
 # Create your views here.
 
@@ -175,3 +180,63 @@ def search(request):
    return render(request,"search.html",{})
 
 
+
+# ---------------------------------API----------------------------------------
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CustomerViewSet(viewsets.ModelViewSet):
+
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+class ProfileViewSet(viewsets.ModelViewSet):
+
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class ProductPagination(PageNumberPagination):
+    page_size = 6
+
+class ProductViewSet(viewsets.ModelViewSet):
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = ProductPagination
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+class SliderViewSet(viewsets.ModelViewSet):
+
+    queryset = Slider.objects.all()
+    serializer_class = SliderSerializer
+
+class ProductFilter(filters.FilterSet):
+    name = filters.CharFilter(lookup_expr='icontains')
+    description = filters.CharFilter(lookup_expr='icontains')
+    
+    class Meta:
+        model = Product
+        fields = ['name', 'description']
+
+class ProductSearchViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filterset_class = ProductFilter
+    pagination_class = ProductPagination
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset

@@ -1,7 +1,24 @@
-from django.urls import path
+from django.urls import path,include
 from . import views
+from .views import CategoryViewSet, CustomerViewSet, ProfileViewSet, ProductViewSet, OrderViewSet, SliderViewSet, ProductSearchViewSet
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt import views as jwt_views
 
+router = DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+router.register(r'customers', CustomerViewSet)
+router.register(r'profiles', ProfileViewSet)
+router.register(r'products', ProductViewSet)
+router.register(r'orders', OrderViewSet)
+router.register(r'sliders', SliderViewSet)
+router.register(r'search-products', ProductSearchViewSet,basename='product_search')
 urlpatterns = [
+    path('api/', include(router.urls)),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+]
+
+urlpatterns += [
     path('', views.home ,name='home'),
     path('page/<int:page>/', views.home ,name='home'),
     path('about/', views.about ,name ='about'),
